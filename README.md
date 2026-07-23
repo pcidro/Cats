@@ -4,7 +4,7 @@
 
 **API da rede social para gatos**
 
-Uma rede social onde donos podem cadastrar seus gatinhos e compartilhar fotos fofas com a comunidade.
+Uma rede social onde donos podem cadastrar seus gatinhos e compartilhar fotos com a comunidade.
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
