@@ -42,3 +42,4 @@ Thumbs.db
 # Qualquer arquivo Markdown
 *.md
 !README.md
+/generated/prisma

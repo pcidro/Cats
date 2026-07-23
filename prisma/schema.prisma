@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  username     String    @unique
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  avatarUrl    String?   @map("avatar_url")
+  role         UserRole  @default(USER)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  cats         Cat[]
+  posts        Post[]
+  comments     Comment[]
+  likes        Like[]
+
+  @@map("users")
+}
+
+model Cat {
+  id         String    @id @default(uuid())
+  name       String
+  birthDate  DateTime? @map("birth_date")
+  bio        String?
+  avatarUrl  String?   @map("avatar_url")
+  ownerId    String    @map("owner_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  posts       Post[]
+
+  @@index([ownerId])
+  @@map("cats")
+}
+
+model Post {
+  id         String    @id @default(uuid())
+  caption    String?
+  imageUrl   String    @map("image_url")
+  catId      String    @map("cat_id")
+  authorId   String    @map("author_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  cat         Cat       @relation(fields: [catId], references: [id], onDelete: Cascade)
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments    Comment[]
+  likes       Like[]
+
+  @@index([catId])
+  @@index([authorId])
+  @@map("posts")
+}
+
+model Comment {
+  id         String    @id @default(uuid())
+  content    String
+  userId     String    @map("user_id")
+  postId     String    @map("post_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([postId])
+  @@map("comments")
+}
+
+model Like {
+  id         String    @id @default(uuid())
+  userId     String    @map("user_id")
+  postId     String    @map("post_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@index([userId])
+  @@index([postId])
+  @@map("likes")
+}

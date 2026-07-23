@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api", routes);
 
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
