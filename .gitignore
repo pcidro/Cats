@@ -32,7 +32,6 @@ coverage/
 .DS_Store
 Thumbs.db
 
-
 .vscode/
 
 # Arquivos do JetBrains (WebStorm, IntelliJ)
@@ -42,4 +41,6 @@ Thumbs.db
 # Qualquer arquivo Markdown
 *.md
 !README.md
+!docs/**/*.md
+
 /generated/prisma
