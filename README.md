@@ -16,7 +16,7 @@ Uma rede social onde donos podem cadastrar seus gatinhos e compartilhar fotos fo
 
 ---
 
-## 📖 Sobre
+## Sobre
 
 Este é o **backend** da rede social **Cats**. Uma API REST construída com Express e TypeScript que fornece todos os endpoints necessários para o funcionamento da plataforma.
 
@@ -24,7 +24,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 | Status | Funcionalidade                                    |
 | :----: | ------------------------------------------------- |
@@ -43,7 +43,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Tecnologia                                    | Uso                           |
 | --------------------------------------------- | ----------------------------- |
@@ -56,7 +56,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 backend/
