@@ -12,6 +12,6 @@ export const authUserSchema = z.object({
       .regex(/[a-z]/, {
         message: "A senha deve conter pelo menos uma letra minúscula",
       })
-      .regex(/[0-9]/, { message: "A senha deve conter pelo menos um número" }),
+      .regex(/[0-9]/, { message: "A senha deve ter pelo menos um número" }),
   }),
 });
