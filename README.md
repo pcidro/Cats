@@ -27,7 +27,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 ## Funcionalidades
 
 | Status | Funcionalidade                                    |
-| :----: | ------------------------------------------------- |
+| :----: | ------------------------------------------------- | --- |
 |   ✅   | Estrutura do servidor Express                     |
 |   ✅   | Modelagem do banco de dados (Prisma + PostgreSQL) |
 |   ✅   | Tratamento global de erros e middleware 404       |
@@ -35,8 +35,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
-|   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
-|   📋   | Listagem / Edição de gatos                        |
+|   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |     |
 |   📋   | Upload de imagens                                 |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
@@ -207,6 +206,5 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 
 - [ ] Deploy no Render
 - [ ] Testes e integração contínua (CI)
-
 
 ---

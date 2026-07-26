@@ -2,10 +2,12 @@ import { Router } from "express";
 import { CreateCatController } from "../controllers/cat/CreateCatController";
 import { DeleteCatController } from "../controllers/cat/DeleteCatController";
 import { GetCatController } from "../controllers/cat/GetCatController";
+import { UpdateCatController } from "../controllers/cat/UpdateCatController";
 import { validateSchema } from "../middlewares/validateSchema";
 import { createCatSchema } from "../schemas/cat/createCatSchema";
 import { deleteCatSchema } from "../schemas/cat/deleteCatSchema";
 import { getCatSchema } from "../schemas/cat/getCatSchema";
+import { updateCatSchema } from "../schemas/cat/updateCatSchema";
 import { isAuthenticated } from "../middlewares/IsAuthenticated";
 
 const catRoutes = Router();
@@ -23,6 +25,13 @@ catRoutes.get(
   isAuthenticated,
   validateSchema(getCatSchema),
   new GetCatController().handle,
+);
+
+catRoutes.put(
+  "/cat/:id",
+  isAuthenticated,
+  validateSchema(updateCatSchema),
+  new UpdateCatController().handle,
 );
 
 catRoutes.delete(
