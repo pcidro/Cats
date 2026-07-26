@@ -1,10 +1,11 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { UserController } from "./controllers/user/UserController";
 import { AuthUserController } from "./controllers/auth/AuthUserController";
 import { validateSchema } from "./middlewares/validateSchema";
 import { createUserSchema } from "./schemas/user/createUserSchema";
 import { authUserSchema } from "./schemas/auth/authUserSchema";
 import { DetailUserController } from "./controllers/user/DetailuserController";
+import { isAuthenticated } from "./middlewares/IsAuthenticated";
 
 const routes = Router();
 
@@ -22,6 +23,6 @@ routes.post(
   new AuthUserController().handle,
 );
 
-routes.get("/me", new DetailUserController().handle);
+routes.get("/me", isAuthenticated, new DetailUserController().handle);
 
 export default routes;
