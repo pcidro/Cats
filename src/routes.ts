@@ -7,7 +7,9 @@ import { authUserSchema } from "./schemas/auth/authUserSchema";
 import { DetailUserController } from "./controllers/user/DetailuserController";
 import { isAuthenticated } from "./middlewares/IsAuthenticated";
 import { CreateCatController } from "./controllers/cat/CreateCatController";
+import { DeleteCatController } from "./controllers/cat/DeleteCatController";
 import { createCatSchema } from "./schemas/cat/createCatSchema";
+import { deleteCatSchema } from "./schemas/cat/deleteCatSchema";
 
 const routes = Router();
 
@@ -35,5 +37,13 @@ routes.post(
   validateSchema(createCatSchema),
   new CreateCatController().handle,
 );
+
+routes.delete(
+  "/cat",
+  isAuthenticated,
+  validateSchema(deleteCatSchema),
+  new DeleteCatController().handle,
+);
+
 
 export default routes;
