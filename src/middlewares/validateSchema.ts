@@ -6,11 +6,22 @@ export const validateSchema =
   (schema: ZodType) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await schema.parseAsync({
+      const parsed = (await schema.parseAsync({
         body: req.body,
         query: req.query,
         params: req.params,
-      });
+      })) as { body?: unknown; query?: unknown; params?: unknown };
+
+      if (parsed.body !== undefined) {
+        req.body = parsed.body;
+      }
+      if (parsed.query !== undefined) {
+        req.query = parsed.query as any;
+      }
+      if (parsed.params !== undefined) {
+        req.params = parsed.params as any;
+      }
+
       return next();
     } catch (error) {
       if (error instanceof ZodError) {

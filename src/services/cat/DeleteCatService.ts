@@ -1,11 +1,12 @@
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 interface DeleteCatServiceProps {
   id: string;
   ownerId: string;
 }
 
-export class deleteCatService {
+export class DeleteCatService {
   async execute({ id, ownerId }: DeleteCatServiceProps) {
     const cat = await prisma.cat.findUnique({
       where: {
@@ -13,11 +14,11 @@ export class deleteCatService {
       },
     });
     if (!cat) {
-      throw new Error("Cat not found!");
+      throw new AppError("Cat not found!", 404);
     }
 
     if (cat.ownerId !== ownerId) {
-      throw new Error("Unauthorized! You can only delete your own cats.");
+      throw new AppError("Unauthorized! You can only delete your own cats.", 403);
     }
 
     await prisma.cat.delete({

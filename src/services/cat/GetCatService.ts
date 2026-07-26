@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 interface getCatServiceProps {
   id: string;
@@ -12,7 +13,7 @@ export class GetCatService {
       },
     });
     if (!cat) {
-      throw new Error("No Cat Found!");
+      throw new AppError("No Cat Found!", 404);
     }
     return cat;
   }

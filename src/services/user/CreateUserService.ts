@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 interface CreateUserProps {
   name: string;
@@ -19,7 +20,7 @@ export class CreateUserService {
     });
 
     if (userAlreadyExists) {
-      throw new Error("Usuário já cadastrado!");
+      throw new AppError("Usuário já cadastrado!", 400);
     }
 
     const username = await this.generateUsername(name);

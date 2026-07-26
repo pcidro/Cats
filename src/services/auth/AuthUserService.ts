@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 interface AuthUserServiceProps {
   email: string;
@@ -9,20 +10,22 @@ interface AuthUserServiceProps {
 
 export class AuthUserService {
   async execute({ email, password }: AuthUserServiceProps) {
+    const normalizedEmail = email.trim().toLowerCase();
+
     const user = await prisma.user.findFirst({
       where: {
-        email,
+        email: normalizedEmail,
       },
     });
 
     if (!user) {
-      throw new Error("Email ou senha incorretos");
+      throw new AppError("Email ou senha incorretos", 401);
     }
 
     const passwordMatch = await compare(password, user.passwordHash);
 
     if (!passwordMatch) {
-      throw new Error("Email ou senha incorretos");
+      throw new AppError("Email ou senha incorretos", 401);
     }
 
     const token = sign(

@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { deleteCatService } from "../../services/cat/DeleteCatService";
+import { DeleteCatService } from "../../services/cat/DeleteCatService";
 
 export class DeleteCatController {
   async handle(req: Request, res: Response) {
     const { id } = req.params;
     const ownerId = req.user_id;
 
-    const DeleteCatService = new deleteCatService();
+    const deleteCatService = new DeleteCatService();
 
-    const cat = await DeleteCatService.execute({
+    const cat = await deleteCatService.execute({
       id: id as string,
-      ownerId,
+      ownerId: ownerId!,
     });
 
     return res.json({ message: "Cat deleted", cat });

@@ -3,9 +3,9 @@ import { prisma } from "../../lib/prisma";
 interface CreateCatServiceProps {
   name: string;
   birthDate?: Date;
-  bio: string;
+  bio?: string;
   ownerId: string;
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
 export class CreateCatService {

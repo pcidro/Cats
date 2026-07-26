@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 export class DetailUserService {
   async execute(user_id: string) {
@@ -16,7 +17,7 @@ export class DetailUserService {
     });
 
     if (!user) {
-      throw new Error("Usuário não encontrado");
+      throw new AppError("Usuário não encontrado", 404);
     }
 
     return user;
