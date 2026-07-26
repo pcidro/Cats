@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "./routes";
 import cors from "cors";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -9,6 +10,7 @@ app.use(express.json());
 
 app.use(cors());
 app.use("/api", routes);
+app.use(errorHandler);
 
 app.use((_req, res) => {
   res.status(404).json({ error: "Route not found" });
