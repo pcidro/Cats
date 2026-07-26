@@ -6,10 +6,12 @@ import { createUserSchema } from "./schemas/user/createUserSchema";
 import { authUserSchema } from "./schemas/auth/authUserSchema";
 import { DetailUserController } from "./controllers/user/DetailuserController";
 import { isAuthenticated } from "./middlewares/IsAuthenticated";
+import { CreateCatController } from "./controllers/cat/CreateCatController";
+import { createCatSchema } from "./schemas/cat/createCatSchema";
 
 const routes = Router();
 
-// Rotas Usuário
+// Routes User
 
 routes.post(
   "/users",
@@ -24,5 +26,14 @@ routes.post(
 );
 
 routes.get("/me", isAuthenticated, new DetailUserController().handle);
+
+// Rotas Cats
+
+routes.post(
+  "/cat",
+  isAuthenticated,
+  validateSchema(createCatSchema),
+  new CreateCatController().handle,
+);
 
 export default routes;
