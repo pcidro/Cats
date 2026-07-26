@@ -30,10 +30,11 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 | :----: | ------------------------------------------------- |
 |   ✅   | Estrutura do servidor Express                     |
 |   ✅   | Modelagem do banco de dados (Prisma + PostgreSQL) |
-|   ✅   | Health check da API                               |
-|   📋   | Autenticação (cadastro e login)                   |
-|   📋   | CRUD de usuários                                  |
-|   📋   | CRUD de gatos                                     |
+|   ✅   | Tratamento global de erros e middleware 404       |
+|   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
+|   ✅   | Validação de schemas com Zod                      |
+|   ✅   | Cadastro de gatos (`POST /api/cat`)               |
+|   📋   | Listagem / Edição / Remoção de gatos              |
 |   📋   | Upload de imagens                                 |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
@@ -52,6 +53,8 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 | [Express](https://expressjs.com/)             | Framework HTTP                |
 | [Prisma](https://www.prisma.io/)              | ORM para banco de dados       |
 | [PostgreSQL](https://www.postgresql.org/)     | Banco de dados relacional     |
+| [Zod](https://zod.dev/)                       | Validação de schemas          |
+| [JWT](https://jwt.io/)                        | Autenticação via Token        |
 | [tsx](https://github.com/privatenumber/tsx)   | Execução de TypeScript em dev |
 
 ---
@@ -69,9 +72,13 @@ backend/
 │   ├── migrations/          # Migrações do banco de dados
 │   └── schema.prisma        # Schema do Prisma
 ├── src/
+│   ├── controllers/         # Controladores da aplicação (auth, user, cat)
 │   ├── lib/
 │   │   └── prisma.ts        # Instância do Prisma Client
-│   ├── routes.ts            # Definição das rotas
+│   ├── middlewares/         # Middlewares (auth, validação Zod, erro global)
+│   ├── routes.ts            # Definição das rotas da API
+│   ├── schemas/             # Schemas de validação Zod
+│   ├── services/            # Camada de regras de negócio
 │   └── server.ts            # Ponto de entrada do servidor
 ├── .env                     # Variáveis de ambiente (não versionado)
 ├── .gitignore
@@ -111,6 +118,7 @@ Crie um arquivo `.env` na raiz do backend com as seguintes variáveis:
 ```env
 PORT=3333
 DATABASE_URL="postgresql://usuario:senha@host:5432/nome_do_banco?sslmode=require"
+JWT_SECRET="sua_chave_secreta_jwt"
 ```
 
 4. **Gere o Prisma Client e rode as migrações:**
@@ -127,22 +135,6 @@ npm run dev
 ```
 
 O servidor estará rodando em `http://localhost:3333`.
-
-### Verificando se está funcionando
-
-```bash
-curl http://localhost:3333/api/health
-```
-
-Resposta esperada:
-
-```json
-{
-  "status": "ok",
-  "message": "Cats API ok",
-  "timestamp": "2026-07-23T00:00:00.000Z"
-}
-```
 
 ---
 
@@ -180,18 +172,20 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 - [x] Setup do servidor Express + TypeScript
 - [x] Configuração do Prisma com PostgreSQL
 - [x] Modelagem do banco de dados
-- [x] Health check endpoint
+- [x] Middleware global de tratamento de erros
 
-### Fase 2 — Autenticação
+### Fase 2 — Autenticação & Validação ✅
 
-- [ ] Cadastro de usuário
-- [ ] Login com JWT
-- [ ] Middleware de autenticação
-- [ ] Rotas protegidas
+- [x] Cadastro de usuário (`POST /api/users`)
+- [x] Login com JWT (`POST /api/auth`)
+- [x] Middleware de autenticação (`isAuthenticated`)
+- [x] Rota de perfil do usuário autenticado (`GET /api/me`)
+- [x] Validação de payloads com Zod (`validateSchema`)
 
-### Fase 3 — Funcionalidades Core
+### Fase 3 — Funcionalidades Core 🚧
 
-- [ ] CRUD de gatos (cadastrar, editar, remover)
+- [x] Cadastro de gatos (`POST /api/cat`)
+- [ ] Listagem, edição e remoção de gatos
 - [ ] Upload de imagens
 - [ ] Criação de posts (foto + legenda)
 - [ ] Feed de fotos
@@ -200,14 +194,12 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 
 - [ ] Curtir / descurtir posts
 - [ ] Comentários nos posts
-- [ ] Perfil do usuário (com seus gatos)
-- [ ] Perfil do gato (fotos + dono)
+- [ ] Perfil detalhado do gato e dono
 
 ### Fase 5 — Deploy e Polimento
 
 - [ ] Deploy no Render
-- [ ] Variáveis de ambiente em produção
-- [ ] Tratamento de erros global
-- [ ] Validação de dados (Zod)
+- [ ] Testes e integração contínua (CI)
+
 
 ---
