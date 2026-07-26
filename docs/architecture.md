@@ -14,10 +14,11 @@ A arquitetura do backend segue o padrão de **Camadas (Layered Architecture)**, 
 
 ---
 
-### 2. Middlewares (`src/middlewares/`)
-- **`validateSchema`:** Valida o corpo das requisições utilizando schemas do Zod antes de chegar ao controller. Retorna `400 Bad Request` com os detalhes dos campos em caso de erro.
+### 2. Middlewares & Erros (`src/middlewares/`, `src/errors/`)
+- **`AppError` (`src/errors/AppError.ts`):** Classe de erro customizada estendendo `Error`, permitindo que os serviços lancem exceções de domínio com status HTTP específicos (ex: `400 Bad Request`, `403 Forbidden`, `404 Not Found`).
+- **`validateSchema`:** Valida parâmetros e corpo das requisições utilizando schemas Zod antes de chegar ao controller.
 - **`isAuthenticated`:** Intercepta rotas protegidas, valida o Token JWT enviado no header `Authorization: Bearer <token>` e injeta o `user_id` na requisição.
-- **`errorHandler`:** Captura exceções não tratadas e erros customizados (ex: `Error`), garantindo respostas JSON limpas (`400` ou `500`).
+- **`errorHandler`:** Captura exceções capturadas pela aplicação. Se o erro for uma instância de `AppError`, retorna a mensagem amigável com seu status code configurado; caso contrário, gera uma resposta `500 Internal Server Error`.
 
 ---
 

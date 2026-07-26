@@ -27,15 +27,16 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 ## Funcionalidades
 
 | Status | Funcionalidade                                    |
-| :----: | ------------------------------------------------- | --- |
+| :----: | ------------------------------------------------- |
 |   ✅   | Estrutura do servidor Express                     |
 |   ✅   | Modelagem do banco de dados (Prisma + PostgreSQL) |
-|   ✅   | Tratamento global de erros e middleware 404       |
+|   ✅   | Tratamento de erros customizado (`AppError`)      |
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
-|   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |     |
+|   ✅   | Edição de gatos (`PUT /api/cat/:id`)              |
+|   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
 |   📋   | Upload de imagens                                 |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
@@ -74,6 +75,7 @@ backend/
 │   └── schema.prisma        # Schema do Prisma
 ├── src/
 │   ├── controllers/         # Controladores da aplicação (auth, user, cat)
+│   ├── errors/              # Erros customizados da aplicação (AppError)
 │   ├── lib/
 │   │   └── prisma.ts        # Instância do Prisma Client
 │   ├── middlewares/         # Middlewares (auth, validação Zod, erro global)
@@ -190,8 +192,8 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 
 - [x] Cadastro de gatos (`POST /api/cat`)
 - [x] Busca de gato por ID (`GET /api/cat/:id`)
+- [x] Edição de perfil de gato (`PUT /api/cat/:id`)
 - [x] Remoção de gatos (`DELETE /api/cat/:id`)
-- [ ] Listagem e edição de gatos
 - [ ] Upload de imagens
 - [ ] Criação de posts (foto + legenda)
 - [ ] Feed de fotos

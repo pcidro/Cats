@@ -172,6 +172,42 @@ Busca os detalhes de um gato específico pelo ID.
 
 ---
 
+#### `PUT /api/cat/:id`
+
+Atualiza as informações do perfil de um gato cadastrado (somente o dono pode atualizar seu próprio gato).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros (obrigatório); `name` (mínimo 2 caracteres opcional), `birthDate` (Data opcional), `bio` (opcional), `avatarUrl` (opcional) no body.
+
+**Parâmetros de Rota:**
+- `id` (String): ID do gato.
+
+**Body (todos os campos são opcionais):**
+```json
+{
+  "name": "Mingau Editado",
+  "birthDate": "2022-05-10T00:00:00.000Z",
+  "bio": "Gatinho carinhoso e dorminhoco",
+  "avatarUrl": "https://example.com/novo-mingau.jpg"
+}
+```
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-cat-exemplo",
+  "name": "Mingau Editado",
+  "birthDate": "2022-05-10T00:00:00.000Z",
+  "bio": "Gatinho carinhoso e dorminhoco",
+  "avatarUrl": "https://example.com/novo-mingau.jpg",
+  "ownerId": "uuid-v4-exemplo",
+  "createdAt": "2026-07-25T21:00:00.000Z",
+  "updatedAt": "2026-07-26T21:00:00.000Z"
+}
+```
+
+---
+
 #### `DELETE /api/cat/:id`
 
 Remove um gato cadastrado (somente o dono pode remover seu próprio gato).
