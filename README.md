@@ -34,7 +34,9 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
-|   📋   | Listagem / Edição / Remoção de gatos              |
+|   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
+|   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
+|   📋   | Listagem / Edição de gatos                        |
 |   📋   | Upload de imagens                                 |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
@@ -76,7 +78,10 @@ backend/
 │   ├── lib/
 │   │   └── prisma.ts        # Instância do Prisma Client
 │   ├── middlewares/         # Middlewares (auth, validação Zod, erro global)
-│   ├── routes.ts            # Definição das rotas da API
+│   ├── routes/              # Rotas da API separadas por módulo (user, cat)
+│   │   ├── index.ts         # Agregador principal de rotas
+│   │   ├── cat.routes.ts    # Rotas do módulo Cat
+│   │   └── user.routes.ts   # Rotas do módulo User
 │   ├── schemas/             # Schemas de validação Zod
 │   ├── services/            # Camada de regras de negócio
 │   └── server.ts            # Ponto de entrada do servidor
@@ -185,7 +190,9 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 ### Fase 3 — Funcionalidades Core 🚧
 
 - [x] Cadastro de gatos (`POST /api/cat`)
-- [ ] Listagem, edição e remoção de gatos
+- [x] Busca de gato por ID (`GET /api/cat/:id`)
+- [x] Remoção de gatos (`DELETE /api/cat/:id`)
+- [ ] Listagem e edição de gatos
 - [ ] Upload de imagens
 - [ ] Criação de posts (foto + legenda)
 - [ ] Feed de fotos

@@ -8,9 +8,9 @@ A arquitetura do backend segue o padrão de **Camadas (Layered Architecture)**, 
 
 ## Camadas do Sistema
 
-### 1. Servidor HTTP & Rotas (`server.ts`, `routes.ts`)
+### 1. Servidor HTTP & Rotas (`src/server.ts`, `src/routes/`)
 - **Ponto de entrada:** Inicializa o Express, habilita parsers (JSON), habilita CORS e registra o manipulador global de erros.
-- **Roteador:** Define a lista de endpoints da API, conectando cada rota aos seus middlewares e controllers.
+- **Roteador Modular:** As rotas são organizadas por domínio dentro de `src/routes/` (ex: `user.routes.ts`, `cat.routes.ts`) e agregadas no roteador principal `src/routes/index.ts`. Cada rota se conecta aos seus respectivos middlewares, schemas Zod e controllers.
 
 ---
 

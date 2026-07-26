@@ -144,6 +144,54 @@ Cadastra um novo gato associado ao usuário autenticado.
 
 ---
 
+#### `GET /api/cat/:id`
+
+Busca os detalhes de um gato específico pelo ID.
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (obrigatório).
+
+**Parâmetros de Rota:**
+- `id` (String): ID do gato.
+
+**Resposta `200` (OK):**
+```json
+{
+  "cat": {
+    "id": "uuid-cat-exemplo",
+    "name": "Mingau",
+    "birthDate": "2022-05-10T00:00:00.000Z",
+    "bio": "Um gatinho muito carinhoso",
+    "avatarUrl": "https://example.com/mingau.jpg",
+    "ownerId": "uuid-v4-exemplo",
+    "createdAt": "2026-07-25T21:00:00.000Z",
+    "updatedAt": "2026-07-25T21:00:00.000Z"
+  }
+}
+```
+
+---
+
+#### `DELETE /api/cat/:id`
+
+Remove um gato cadastrado (somente o dono pode remover seu próprio gato).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (UUID válido e obrigatório).
+
+**Parâmetros de Rota:**
+- `id` (UUID): ID do gato a ser removido.
+
+**Resposta `200` (OK):**
+```json
+{
+  "message": "Cat deleted"
+}
+```
+
+---
+
+
 ## Estrutura Padrão de Erros
 
 Em caso de erros na requisição, a API retorna respostas padronizadas no seguinte formato:
