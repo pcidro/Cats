@@ -4,8 +4,11 @@ import { AuthUserController } from "./controllers/auth/AuthUserController";
 import { validateSchema } from "./middlewares/validateSchema";
 import { createUserSchema } from "./schemas/user/createUserSchema";
 import { authUserSchema } from "./schemas/auth/authUserSchema";
+import { DetailUserController } from "./controllers/user/DetailuserController";
 
 const routes = Router();
+
+// Rotas Usuário
 
 routes.post(
   "/users",
@@ -18,5 +21,7 @@ routes.post(
   validateSchema(authUserSchema),
   new AuthUserController().handle,
 );
+
+routes.get("/me", new DetailUserController().handle);
 
 export default routes;
