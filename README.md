@@ -34,6 +34,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
+|   ✅   | Listagem de gatos por usuário (`GET /api/users/:userId/cats`) |
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
 |   ✅   | Edição de gatos (`PUT /api/cat/:id`)              |
 |   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
@@ -191,6 +192,7 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 ### Fase 3 — Funcionalidades Core 🚧
 
 - [x] Cadastro de gatos (`POST /api/cat`)
+- [x] Listagem de gatos por usuário (`GET /api/users/:userId/cats`)
 - [x] Busca de gato por ID (`GET /api/cat/:id`)
 - [x] Edição de perfil de gato (`PUT /api/cat/:id`)
 - [x] Remoção de gatos (`DELETE /api/cat/:id`)

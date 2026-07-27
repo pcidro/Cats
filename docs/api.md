@@ -144,6 +144,34 @@ Cadastra um novo gato associado ao usuário autenticado.
 
 ---
 
+#### `GET /api/users/:userId/cats`
+
+Lista todos os gatos pertencentes a um determinado perfil de usuário (rota pública).
+
+**Autenticação:** Não requer  
+**Validação (Zod):** `userId` nos parâmetros da URL (obrigatório).
+
+**Parâmetros de Rota:**
+- `userId` (String): ID do usuário proprietário dos gatos.
+
+**Resposta `200` (OK):**
+```json
+[
+  {
+    "id": "uuid-cat-exemplo",
+    "name": "Mingau",
+    "birthDate": "2022-05-10T00:00:00.000Z",
+    "bio": "Um gatinho muito carinhoso",
+    "avatarUrl": "https://example.com/mingau.jpg",
+    "ownerId": "uuid-v4-exemplo",
+    "createdAt": "2026-07-25T21:00:00.000Z",
+    "updatedAt": "2026-07-25T21:00:00.000Z"
+  }
+]
+```
+
+---
+
 #### `GET /api/cat/:id`
 
 Busca os detalhes de um gato específico pelo ID.

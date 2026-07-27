@@ -2,11 +2,13 @@ import { Router } from "express";
 import { CreateCatController } from "../controllers/cat/CreateCatController";
 import { DeleteCatController } from "../controllers/cat/DeleteCatController";
 import { GetCatController } from "../controllers/cat/GetCatController";
+import { GetUserCatsController } from "../controllers/cat/GetUserCatsController";
 import { UpdateCatController } from "../controllers/cat/UpdateCatController";
 import { validateSchema } from "../middlewares/validateSchema";
 import { createCatSchema } from "../schemas/cat/createCatSchema";
 import { deleteCatSchema } from "../schemas/cat/deleteCatSchema";
 import { getCatSchema } from "../schemas/cat/getCatSchema";
+import { getUserCatsSchema } from "../schemas/cat/getUserCatsSchema";
 import { updateCatSchema } from "../schemas/cat/updateCatSchema";
 import { isAuthenticated } from "../middlewares/IsAuthenticated";
 
@@ -18,6 +20,12 @@ catRoutes.post(
   isAuthenticated,
   validateSchema(createCatSchema),
   new CreateCatController().handle,
+);
+
+catRoutes.get(
+  "/users/:userId/cats",
+  validateSchema(getUserCatsSchema),
+  new GetUserCatsController().handle,
 );
 
 catRoutes.get(
