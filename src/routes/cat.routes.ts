@@ -11,13 +11,17 @@ import { getCatSchema } from "../schemas/cat/getCatSchema";
 import { getUserCatsSchema } from "../schemas/cat/getUserCatsSchema";
 import { updateCatSchema } from "../schemas/cat/updateCatSchema";
 import { isAuthenticated } from "../middlewares/IsAuthenticated";
+import multer from "multer";
+import uploadConfig from "../config/multer";
 
 const catRoutes = Router();
+const upload = multer(uploadConfig);
 
 // Rotas Cats
 catRoutes.post(
   "/cat",
   isAuthenticated,
+  upload.single("avatarUrl"),
   validateSchema(createCatSchema),
   new CreateCatController().handle,
 );
