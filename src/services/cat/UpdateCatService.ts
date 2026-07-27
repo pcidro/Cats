@@ -1,13 +1,16 @@
+import { Readable } from "stream";
+import { cloudinary } from "../../config/cloudinary";
 import { prisma } from "../../lib/prisma";
 import { AppError } from "../../errors/AppError";
 
 interface UpdateCatServiceProps {
   id: string;
   ownerId: string;
-  avatarUrl?: string;
   name?: string;
   bio?: string;
   birthDate?: Date | null;
+  imageBuffer?: Buffer;
+  imageName?: string;
 }
 
 export class UpdateCatService {
@@ -17,7 +20,8 @@ export class UpdateCatService {
     name,
     bio,
     birthDate,
-    avatarUrl,
+    imageBuffer,
+    imageName,
   }: UpdateCatServiceProps) {
     const cat = await prisma.cat.findFirst({
       where: {
@@ -32,18 +36,48 @@ export class UpdateCatService {
       throw new AppError("Unauthorized! You can only edit your own cats.", 403);
     }
 
-    const updateCat = await prisma.cat.update({
+    let avatarUrlToUpdate = cat.avatarUrl;
+
+    if (imageBuffer && imageName) {
+      try {
+        const result = await new Promise<any>((resolve, reject) => {
+          const uploadStream = cloudinary.uploader.upload_stream(
+            {
+              folder: "cats",
+              resource_type: "image",
+              public_id: `${Date.now()}-${imageName.split(".")[0]}`,
+            },
+            (error, result) => {
+              if (error) {
+                reject(error);
+              }
+              resolve(result);
+            },
+          );
+          const bufferStream = Readable.from(imageBuffer);
+          bufferStream.pipe(uploadStream);
+        });
+
+        avatarUrlToUpdate = result.secure_url;
+      } catch (error) {
+        console.error("Error uploading cat image:", error);
+        throw new AppError("Error uploading cat image to Cloudinary", 500);
+      }
+    }
+
+    const updatedCat = await prisma.cat.update({
       where: {
-        id: id,
+        id,
       },
       data: {
         name: name ?? cat.name,
         bio: bio ?? cat.bio,
         birthDate: birthDate ?? cat.birthDate,
-        avatarUrl: avatarUrl ?? cat.avatarUrl,
+        avatarUrl: avatarUrlToUpdate,
       },
     });
 
-    return updateCat;
+    return updatedCat;
   }
 }
+

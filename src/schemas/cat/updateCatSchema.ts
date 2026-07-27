@@ -13,6 +13,7 @@ export const updateCatSchema = z.object({
       .date({ message: "Invalid birth date" })
       .optional(),
     bio: z.string().optional(),
-    avatarUrl: z.string({ message: "Invalid URL" }).optional(),
   }),
+  file: z.any().optional(),
 });
+

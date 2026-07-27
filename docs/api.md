@@ -233,20 +233,17 @@ Busca os detalhes de um gato específico pelo ID.
 Atualiza as informações do perfil de um gato cadastrado (somente o dono pode atualizar seu próprio gato).
 
 **Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
-**Validação (Zod):** `id` nos parâmetros (obrigatório); `name` (mínimo 2 caracteres opcional), `birthDate` (Data opcional), `bio` (opcional), `avatarUrl` (opcional) no body.
+**Content-Type:** `multipart/form-data`  
+**Validação (Zod):** `id` nos parâmetros (obrigatório); `name` (mínimo 2 caracteres opcional), `birthDate` (Data opcional), `bio` (opcional); campo de arquivo `avatarUrl` (opcional).
 
 **Parâmetros de Rota:**
 - `id` (String): ID do gato.
 
-**Body (todos os campos são opcionais):**
-```json
-{
-  "name": "Mingau Editado",
-  "birthDate": "2022-05-10T00:00:00.000Z",
-  "bio": "Gatinho carinhoso e dorminhoco",
-  "avatarUrl": "https://example.com/novo-mingau.jpg"
-}
-```
+**Form Data (todos os campos são opcionais):**
+- `name` (Text, opcional): Novo nome do gato.
+- `birthDate` (Text, opcional): Data de nascimento.
+- `bio` (Text, opcional): Biografia/descrição.
+- `avatarUrl` (File, opcional): Arquivo de imagem para a foto do gato via Cloudinary.
 
 **Resposta `200` (OK):**
 ```json

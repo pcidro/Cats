@@ -42,6 +42,7 @@ catRoutes.get(
 catRoutes.put(
   "/cat/:id",
   isAuthenticated,
+  upload.single("avatarUrl"),
   validateSchema(updateCatSchema),
   new UpdateCatController().handle,
 );
