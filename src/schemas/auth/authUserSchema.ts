@@ -2,9 +2,9 @@ import { z } from "zod";
 
 export const authUserSchema = z.object({
   body: z.object({
-    email: z.email({ message: "Email inválido!" }),
+    email: z.email({ message: "Invalid email address" }),
     password: z
-      .string({ message: "É necessário informar uma senha" })
-      .min(1, { message: "É necessário informar uma senha" }),
+      .string({ message: "Password is required" })
+      .min(1, { message: "Password is required" }),
   }),
 });

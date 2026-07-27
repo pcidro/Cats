@@ -1,6 +1,7 @@
 import { Readable } from "stream";
 import { cloudinary } from "../../config/cloudinary";
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
 interface CreateCatServiceProps {
   name: string;
@@ -45,6 +46,7 @@ export class CreateCatService {
       bannerUrl = result.secure_url;
     } catch (error) {
       console.error("Error uploading image:", error);
+      throw new AppError("Error uploading image to Cloudinary", 500);
     }
 
     const cat = await prisma.cat.create({
@@ -60,3 +62,4 @@ export class CreateCatService {
     return cat;
   }
 }
+

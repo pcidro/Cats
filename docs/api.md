@@ -109,6 +109,34 @@ Retorna os detalhes do perfil do usuário autenticado.
 
 ---
 
+#### `PUT /api/users/update`
+
+Atualiza os dados do perfil do usuário autenticado (username e/ou foto de avatar via Cloudinary).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Content-Type:** `multipart/form-data`  
+**Validação (Zod):** `username` (mínimo 3 caracteres opcional); campo de arquivo `avatarUrl` (obrigatório para upload).
+
+**Form Data:**
+- `username` (Text, opcional): Novo nome de usuário.
+- `avatarUrl` (File, obrigatório): Arquivo de imagem para o avatar.
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-v4-exemplo",
+  "name": "João Silva",
+  "username": "joaosilva_novo",
+  "email": "joao@example.com",
+  "avatarUrl": "https://res.cloudinary.com/.../avatars/1722000000-avatar.png",
+  "role": "USER",
+  "createdAt": "2026-07-25T20:00:00.000Z",
+  "updatedAt": "2026-07-27T10:00:00.000Z"
+}
+```
+
+---
+
 ### 🐱 Gatos
 
 #### `POST /api/cat`

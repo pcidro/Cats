@@ -32,13 +32,14 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Modelagem do banco de dados (Prisma + PostgreSQL) |
 |   ✅   | Tratamento de erros customizado (`AppError`)      |
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
+|   ✅   | Atualização de perfil do usuário (`PUT /api/users/update`) |
 |   ✅   | Validação de schemas com Zod                      |
+|   ✅   | Upload de imagens (Cloudinary + Multer)           |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
 |   ✅   | Listagem de gatos por usuário (`GET /api/users/:userId/cats`) |
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
 |   ✅   | Edição de gatos (`PUT /api/cat/:id`)              |
 |   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
-|   📋   | Upload de imagens                                 |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
 |   📋   | Sistema de comentários                            |
@@ -196,7 +197,7 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 - [x] Busca de gato por ID (`GET /api/cat/:id`)
 - [x] Edição de perfil de gato (`PUT /api/cat/:id`)
 - [x] Remoção de gatos (`DELETE /api/cat/:id`)
-- [ ] Upload de imagens
+- [x] Upload de imagens (Cloudinary + Multer)
 - [ ] Criação de posts (foto + legenda)
 - [ ] Feed de fotos
 
