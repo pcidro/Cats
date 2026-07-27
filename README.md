@@ -32,6 +32,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Modelagem do banco de dados (Prisma + PostgreSQL) |
 |   ✅   | Tratamento de erros customizado (`AppError`)      |
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
+|   ✅   | Perfil público do usuário (`GET /api/users/profile/:username`) |
 |   ✅   | Atualização de perfil do usuário (`PUT /api/users/update`) |
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Upload de imagens (Cloudinary + Multer)           |

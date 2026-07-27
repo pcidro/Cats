@@ -109,6 +109,42 @@ Retorna os detalhes do perfil do usuário autenticado.
 
 ---
 
+#### `GET /api/users/profile/:username`
+
+Retorna o perfil público de um usuário através do seu nome de usuário (`username`), incluindo a lista dos seus gatos cadastrados.
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `username` nos parâmetros da URL (obrigatório).
+
+**Parâmetros de Rota:**
+- `username` (String): Nome de usuário único do perfil a ser buscado.
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-v4-exemplo",
+  "name": "João Silva",
+  "username": "joaosilva",
+  "email": "joao@example.com",
+  "avatarUrl": "https://res.cloudinary.com/.../avatars/avatar.png",
+  "role": "USER",
+  "createdAt": "2026-07-25T20:00:00.000Z",
+  "updatedAt": "2026-07-27T10:00:00.000Z",
+  "cats": [
+    {
+      "id": "uuid-cat-exemplo",
+      "name": "Mingau",
+      "birthDate": "2022-05-10T00:00:00.000Z",
+      "bio": "Um gatinho muito carinhoso",
+      "avatarUrl": "https://example.com/mingau.jpg",
+      "createdAt": "2026-07-25T21:00:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
 #### `PUT /api/users/update`
 
 Atualiza os dados do perfil do usuário autenticado (username e/ou foto de avatar via Cloudinary).
