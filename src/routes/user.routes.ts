@@ -10,6 +10,8 @@ import { getUserProfileSchema } from "../schemas/user/getUserProfileSchema";
 import { authUserSchema } from "../schemas/auth/authUserSchema";
 import { isAuthenticated } from "../middlewares/IsAuthenticated";
 import { UpdateUserController } from "../controllers/user/UpdateUserController";
+import { DeleteUserController } from "../controllers/user/DeleteUserController";
+import { deleteUserSchema } from "../schemas/user/deleteUserSchema";
 import multer from "multer";
 import uploadConfig from "../config/multer";
 
@@ -46,5 +48,11 @@ userRoutes.put(
   new UpdateUserController().handle,
 );
 
-export { userRoutes };
+userRoutes.delete(
+  "/users/delete",
+  isAuthenticated,
+  validateSchema(deleteUserSchema),
+  new DeleteUserController().handle,
+);
 
+export { userRoutes };

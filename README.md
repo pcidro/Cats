@@ -34,6 +34,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Autenticação (cadastro, login JWT e rota /me)     |
 |   ✅   | Perfil público do usuário (`GET /api/users/profile/:username`) |
 |   ✅   | Atualização de perfil do usuário (`PUT /api/users/update`) |
+|   ✅   | Remoção de conta do usuário (`DELETE /api/users/delete`) |
 |   ✅   | Validação de schemas com Zod                      |
 |   ✅   | Upload de imagens (Cloudinary + Multer)           |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |

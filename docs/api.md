@@ -173,6 +173,22 @@ Atualiza os dados do perfil do usuário autenticado (username e/ou foto de avata
 
 ---
 
+#### `DELETE /api/users/delete`
+
+Deleta a conta do usuário autenticado (somente o próprio usuário pode deletar sua conta). Também aceita `DELETE /api/users/me` ou `DELETE /api/users/:id`.
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (opcional, UUID válido).
+
+**Resposta `200` (OK):**
+```json
+{
+  "message": "User deleted successfully"
+}
+```
+
+---
+
 ### 🐱 Gatos
 
 #### `POST /api/cat`
