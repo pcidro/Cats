@@ -334,6 +334,45 @@ Remove um gato cadastrado (somente o dono pode remover seu próprio gato).
 
 ### 📸 Posts
 
+#### `GET /api/posts`
+
+Retorna a lista de posts cadastrados no sistema (Feed de fotos), ordenados por data de criação mais recente, incluindo dados do gato e do autor.
+
+**Autenticação:** Não requer  
+**Validação (Zod):** `page` (número, opcional, padrão 1), `limit` (número, opcional, padrão 10, máx 100) na Query URL.
+
+**Query Parameters:**
+- `page` (Number, opcional): Número da página desejada. Ex: `?page=1`
+- `limit` (Number, opcional): Quantidade de posts por página. Ex: `?limit=10`
+
+**Resposta `200` (OK):**
+```json
+[
+  {
+    "id": "uuid-post-exemplo",
+    "caption": "Mingau tirando uma soneca gostosa!",
+    "imageUrl": "https://res.cloudinary.com/.../posts/1722000000-foto.png",
+    "catId": "uuid-cat-exemplo",
+    "authorId": "uuid-v4-exemplo",
+    "createdAt": "2026-07-28T12:00:00.000Z",
+    "updatedAt": "2026-07-28T12:00:00.000Z",
+    "cat": {
+      "id": "uuid-cat-exemplo",
+      "name": "Mingau",
+      "avatarUrl": "https://res.cloudinary.com/.../cat-avatar.png"
+    },
+    "author": {
+      "id": "uuid-v4-exemplo",
+      "name": "João Silva",
+      "username": "joaosilva",
+      "avatarUrl": null
+    }
+  }
+]
+```
+
+---
+
 #### `POST /api/post/:cat_id`
 
 Cria uma nova publicação (foto + legenda) vinculada a um gato (somente o dono do gato pode publicar).

@@ -206,7 +206,7 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 - [x] Criação de posts (`POST /api/post/:cat_id`)
 - [x] Edição de posts (`PUT /api/post/:id`)
 - [x] Remoção de posts (`DELETE /api/post/:id`)
-- [ ] Feed de fotos
+- [x] Feed de fotos (`GET /api/posts`)
 
 ### Fase 4 — Interações Sociais
 
