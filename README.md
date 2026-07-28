@@ -42,6 +42,9 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
 |   ✅   | Edição de gatos (`PUT /api/cat/:id`)              |
 |   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |
+|   ✅   | Criação de posts (`POST /api/post/:cat_id`)        |
+|   ✅   | Edição de posts (`PUT /api/post/:id`)              |
+|   ✅   | Remoção de posts (`DELETE /api/post/:id`)          |
 |   📋   | Feed de fotos                                     |
 |   📋   | Sistema de curtidas                               |
 |   📋   | Sistema de comentários                            |
@@ -200,7 +203,9 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 - [x] Edição de perfil de gato (`PUT /api/cat/:id`)
 - [x] Remoção de gatos (`DELETE /api/cat/:id`)
 - [x] Upload de imagens (Cloudinary + Multer)
-- [ ] Criação de posts (foto + legenda)
+- [x] Criação de posts (`POST /api/post/:cat_id`)
+- [x] Edição de posts (`PUT /api/post/:id`)
+- [x] Remoção de posts (`DELETE /api/post/:id`)
 - [ ] Feed de fotos
 
 ### Fase 4 — Interações Sociais
