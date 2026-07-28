@@ -332,6 +332,89 @@ Remove um gato cadastrado (somente o dono pode remover seu próprio gato).
 
 ---
 
+### 📸 Posts
+
+#### `POST /api/post/:cat_id`
+
+Cria uma nova publicação (foto + legenda) vinculada a um gato (somente o dono do gato pode publicar).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Content-Type:** `multipart/form-data`  
+**Validação (Zod):** `cat_id` nos parâmetros (obrigatório); `caption` (opcional); campo de arquivo `imageUrl` (obrigatório para upload).
+
+**Parâmetros de Rota:**
+- `cat_id` (String): ID do gato.
+
+**Form Data:**
+- `caption` (Text, opcional): Legenda da foto.
+- `imageUrl` (File, obrigatório): Arquivo de imagem a ser enviado ao Cloudinary.
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-post-exemplo",
+  "caption": "Mingau tirando uma soneca gostosa!",
+  "imageUrl": "https://res.cloudinary.com/.../posts/1722000000-foto.png",
+  "catId": "uuid-cat-exemplo",
+  "authorId": "uuid-v4-exemplo",
+  "createdAt": "2026-07-28T12:00:00.000Z",
+  "updatedAt": "2026-07-28T12:00:00.000Z"
+}
+```
+
+---
+
+#### `PUT /api/post/:id`
+
+Edita a legenda de um post existente (somente o autor do post pode editar).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros (obrigatório); `caption` (opcional).
+
+**Parâmetros de Rota:**
+- `id` (String): ID do post.
+
+**Body:**
+```json
+{
+  "caption": "Legenda atualizada do post!"
+}
+```
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-post-exemplo",
+  "caption": "Legenda atualizada do post!",
+  "imageUrl": "https://res.cloudinary.com/.../posts/1722000000-foto.png",
+  "catId": "uuid-cat-exemplo",
+  "authorId": "uuid-v4-exemplo",
+  "createdAt": "2026-07-28T12:00:00.000Z",
+  "updatedAt": "2026-07-28T12:05:00.000Z"
+}
+```
+
+---
+
+#### `DELETE /api/post/:id`
+
+Remove uma publicação cadastrada (somente o autor do post pode remover).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (UUID válido e obrigatório).
+
+**Parâmetros de Rota:**
+- `id` (UUID): ID do post a ser removido.
+
+**Resposta `200` (OK):**
+```json
+{
+  "message": "Post deleted successfully"
+}
+```
+
+
+---
 
 ## Estrutura Padrão de Erros
 
