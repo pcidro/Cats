@@ -366,6 +366,10 @@ Retorna a lista de posts cadastrados no sistema (Feed de fotos), ordenados por d
       "name": "João Silva",
       "username": "joaosilva",
       "avatarUrl": null
+    },
+    "_count": {
+      "likes": 5,
+      "comments": 2
     }
   }
 ]
@@ -451,6 +455,35 @@ Remove uma publicação cadastrada (somente o autor do post pode remover).
   "message": "Post deleted successfully"
 }
 ```
+
+---
+
+### ❤️ Curtidas (Likes)
+
+#### `POST /api/like/:post_id`
+
+Alterna o estado de curtida de um post pelo usuário autenticado (Toggle Like: curte se ainda não curtiu, descurte se já tiver curtido).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `post_id` nos parâmetros da URL (UUID válido e obrigatório).
+
+**Parâmetros de Rota:**
+- `post_id` (UUID): ID do post a ser curtido/descurtido.
+
+**Resposta `200` (OK) — Ao curtir:**
+```json
+{
+  "liked": true
+}
+```
+
+**Resposta `200` (OK) — Ao descurtir:**
+```json
+{
+  "liked": false
+}
+```
+
 
 
 ---

@@ -45,8 +45,8 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Criação de posts (`POST /api/post/:cat_id`)        |
 |   ✅   | Edição de posts (`PUT /api/post/:id`)              |
 |   ✅   | Remoção de posts (`DELETE /api/post/:id`)          |
-|   📋   | Feed de fotos                                     |
-|   📋   | Sistema de curtidas                               |
+|   ✅   | Feed de fotos (`GET /api/posts`)                  |
+|   ✅   | Sistema de curtidas (`POST /api/like/:post_id`)    |
 |   📋   | Sistema de comentários                            |
 
 > ✅ Concluído &nbsp; 🚧 Em progresso &nbsp; 📋 Planejado
@@ -210,7 +210,7 @@ Documentação técnica detalhada está disponível na pasta [`docs/`](./docs/):
 
 ### Fase 4 — Interações Sociais
 
-- [ ] Curtir / descurtir posts
+- [x] Curtir / descurtir posts (`POST /api/like/:post_id`)
 - [ ] Comentários nos posts
 - [ ] Perfil detalhado do gato e dono
 

@@ -31,6 +31,9 @@ export class GetPostService {
             avatarUrl: true,
           },
         },
+        _count: {
+          select: { likes: true, comments: true },
+        },
       },
     });
 
