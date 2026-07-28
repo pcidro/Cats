@@ -10,17 +10,12 @@ import { validateSchema } from "../middlewares/validateSchema";
 import { createPostSchema } from "../schemas/post/createPostSchema";
 import { editPostSchema } from "../schemas/post/editPostSchema";
 import { deletePostSchema } from "../schemas/post/deletePostSchema";
-import { getPostSchema } from "../schemas/post/getPostSchema";
 
 const postRoutes = Router();
 const upload = multer(uploadConfig);
 
 // Rotas Posts
-postRoutes.get(
-  "/posts",
-  validateSchema(getPostSchema),
-  new GetPostController().handle,
-);
+postRoutes.get("/posts", new GetPostController().handle);
 
 postRoutes.post(
   "/post/:cat_id",
