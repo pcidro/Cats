@@ -484,7 +484,38 @@ Alterna o estado de curtida de um post pelo usuário autenticado (Toggle Like: c
 }
 ```
 
+---
 
+### 💬 Comentários (Comments)
+
+#### `POST /api/comment/:post_id`
+
+Cria um novo comentário em uma publicação pelo usuário autenticado.
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `post_id` nos parâmetros da URL (obrigatório); `content` no body (obrigatório, não vazio).
+
+**Parâmetros de Rota:**
+- `post_id` (String): ID do post a ser comentado.
+
+**Body:**
+```json
+{
+  "content": "Que gatinho mais lindo!"
+}
+```
+
+**Resposta `201` (Created):**
+```json
+{
+  "id": "uuid-comment-exemplo",
+  "content": "Que gatinho mais lindo!",
+  "userId": "uuid-v4-exemplo",
+  "postId": "uuid-post-exemplo",
+  "createdAt": "2026-07-29T12:00:00.000Z",
+  "updatedAt": "2026-07-29T12:00:00.000Z"
+}
+```
 
 ---
 
