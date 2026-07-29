@@ -47,7 +47,10 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Remoção de posts (`DELETE /api/post/:id`)          |
 |   ✅   | Feed de fotos (`GET /api/posts`)                  |
 |   ✅   | Sistema de curtidas (`POST /api/like/:post_id`)    |
-|   ✅   | Sistema de comentários (`POST /api/comment/:post_id`) |
+|   ✅   | Listagem de comentários (`GET /api/comments/:post_id`) |
+|   ✅   | Criação de comentários (`POST /api/comment/:post_id`) |
+|   ✅   | Edição de comentários (`PUT /api/comment/:id`) |
+|   ✅   | Remoção de comentários (`DELETE /api/comment/:id`) |
 
 > ✅ Concluído &nbsp; 🚧 Em progresso &nbsp; 📋 Planejado
 

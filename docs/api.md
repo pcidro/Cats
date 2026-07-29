@@ -519,6 +519,84 @@ Cria um novo comentário em uma publicação pelo usuário autenticado.
 
 ---
 
+#### `GET /api/comments/:post_id`
+
+Lista todos os comentários de uma publicação específica, incluindo os dados do autor de cada comentário.
+
+**Autenticação:** Não requer  
+**Validação (Zod):** `post_id` nos parâmetros da URL (obrigatório).
+
+**Resposta `200` (OK):**
+```json
+[
+  {
+    "id": "uuid-comment-exemplo",
+    "content": "Que gatinho mais lindo!",
+    "userId": "uuid-v4-exemplo",
+    "postId": "uuid-post-exemplo",
+    "createdAt": "2026-07-29T12:00:00.000Z",
+    "updatedAt": "2026-07-29T12:00:00.000Z",
+    "user": {
+      "id": "uuid-v4-exemplo",
+      "name": "João Silva",
+      "username": "joaosilva",
+      "avatarUrl": null
+    }
+  }
+]
+```
+
+---
+
+#### `PUT /api/comment/:id`
+
+Edita o conteúdo de um comentário existente (somente o autor do comentário pode editar).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (obrigatório); `content` no body (obrigatório).
+
+**Body:**
+```json
+{
+  "content": "Conteúdo do comentário atualizado!"
+}
+```
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-comment-exemplo",
+  "content": "Conteúdo do comentário atualizado!",
+  "userId": "uuid-v4-exemplo",
+  "postId": "uuid-post-exemplo",
+  "createdAt": "2026-07-29T12:00:00.000Z",
+  "updatedAt": "2026-07-29T12:05:00.000Z"
+}
+```
+
+---
+
+#### `DELETE /api/comment/:id`
+
+Remove um comentário (somente o autor do comentário pode remover).
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** `id` nos parâmetros da URL (obrigatório).
+
+**Resposta `200` (OK):**
+```json
+{
+  "id": "uuid-comment-exemplo",
+  "content": "Que gatinho mais lindo!",
+  "userId": "uuid-v4-exemplo",
+  "postId": "uuid-post-exemplo",
+  "createdAt": "2026-07-29T12:00:00.000Z",
+  "updatedAt": "2026-07-29T12:00:00.000Z"
+}
+```
+
+---
+
 ## Estrutura Padrão de Erros
 
 Em caso de erros na requisição, a API retorna respostas padronizadas no seguinte formato:
