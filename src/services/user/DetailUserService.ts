@@ -13,6 +13,7 @@ export class DetailUserService {
         email: true,
         role: true,
         createdAt: true,
+        avatarUrl: true,
       },
     });
 

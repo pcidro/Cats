@@ -41,6 +41,7 @@ model Cat {
   id         String    @id @default(uuid())
   name       String
   birthDate  DateTime? @map("birth_date")
+  username   String   @unique
   bio        String?
   avatarUrl  String?   @map("avatar_url")
   ownerId    String    @map("owner_id")
