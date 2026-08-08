@@ -2,11 +2,13 @@ import { Router } from "express";
 import { CreateCatController } from "../controllers/cat/CreateCatController";
 import { DeleteCatController } from "../controllers/cat/DeleteCatController";
 import { GetCatController } from "../controllers/cat/GetCatController";
+import { GetCatMeController } from "../controllers/cat/GetCatMeController";
 import { GetUserCatsController } from "../controllers/cat/GetUserCatsController";
 import { UpdateCatController } from "../controllers/cat/UpdateCatController";
 import { validateSchema } from "../middlewares/validateSchema";
 import { createCatSchema } from "../schemas/cat/createCatSchema";
 import { deleteCatSchema } from "../schemas/cat/deleteCatSchema";
+import { getCatMeSchema } from "../schemas/cat/getCatMeSchema";
 import { getCatSchema } from "../schemas/cat/getCatSchema";
 import { getUserCatsSchema } from "../schemas/cat/getUserCatsSchema";
 import { updateCatSchema } from "../schemas/cat/updateCatSchema";
@@ -24,6 +26,13 @@ catRoutes.post(
   upload.single("avatarUrl"),
   validateSchema(createCatSchema),
   new CreateCatController().handle,
+);
+
+catRoutes.get(
+  "/cats/me",
+  isAuthenticated,
+  validateSchema(getCatMeSchema),
+  new GetCatMeController().handle,
 );
 
 catRoutes.get(

@@ -252,6 +252,31 @@ Lista todos os gatos pertencentes a um determinado perfil de usuário (rota púb
 
 ---
 
+#### `GET /api/cats/me`
+
+Lista todos os gatos cadastrados pelo próprio usuário autenticado.
+
+**Autenticação:** Bearer Token JWT (`Authorization: Bearer <token>`)  
+**Validação (Zod):** Nenhuma (utiliza o ID do usuário extraído do token JWT).
+
+**Resposta `200` (OK):**
+```json
+[
+  {
+    "id": "uuid-cat-exemplo",
+    "name": "Mingau",
+    "birthDate": "2022-05-10T00:00:00.000Z",
+    "bio": "Um gatinho muito carinhoso",
+    "avatarUrl": "https://res.cloudinary.com/.../avatars/mingau.jpg",
+    "ownerId": "uuid-v4-exemplo",
+    "createdAt": "2026-07-25T21:00:00.000Z",
+    "updatedAt": "2026-07-25T21:00:00.000Z"
+  }
+]
+```
+
+---
+
 #### `GET /api/cat/:id`
 
 Busca os detalhes de um gato específico pelo ID.

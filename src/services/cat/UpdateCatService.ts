@@ -7,6 +7,7 @@ interface UpdateCatServiceProps {
   id: string;
   ownerId: string;
   name?: string;
+  username?: string;
   bio?: string;
   birthDate?: Date | null;
   imageBuffer?: Buffer;
@@ -18,6 +19,7 @@ export class UpdateCatService {
     id,
     ownerId,
     name,
+    username,
     bio,
     birthDate,
     imageBuffer,
@@ -71,6 +73,7 @@ export class UpdateCatService {
       },
       data: {
         name: name ?? cat.name,
+        username: username ?? cat.username,
         bio: bio ?? cat.bio,
         birthDate: birthDate ?? cat.birthDate,
         avatarUrl: avatarUrlToUpdate,

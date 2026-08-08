@@ -32,6 +32,18 @@ export class GetPostService {
             avatarUrl: true,
           },
         },
+        comments: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                avatarUrl: true,
+              },
+            },
+          },
+        },
         _count: {
           select: { likes: true, comments: true },
         },

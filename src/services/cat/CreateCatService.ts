@@ -10,6 +10,7 @@ interface CreateCatServiceProps {
   ownerId: string;
   imageBuffer: Buffer;
   imageName: string;
+  username: string;
 }
 
 export class CreateCatService {
@@ -19,6 +20,7 @@ export class CreateCatService {
     bio,
     ownerId,
     imageBuffer,
+    username,
     imageName,
   }: CreateCatServiceProps) {
     let bannerUrl = "";
@@ -49,11 +51,21 @@ export class CreateCatService {
       throw new AppError("Error uploading image to Cloudinary", 500);
     }
 
+    console.log({
+      name,
+      birthDate,
+      bio,
+      username,
+      ownerId,
+      bannerUrl,
+    });
+
     const cat = await prisma.cat.create({
       data: {
         name,
         birthDate: birthDate ? new Date(birthDate) : null,
         bio,
+        username,
         ownerId,
         avatarUrl: bannerUrl,
       },
@@ -62,4 +74,3 @@ export class CreateCatService {
     return cat;
   }
 }
-

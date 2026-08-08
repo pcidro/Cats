@@ -3,7 +3,7 @@ import { CreateCatService } from "../../services/cat/CreateCatService";
 
 export class CreateCatController {
   async handle(req: Request, res: Response) {
-    const { name, birthDate, bio } = req.body;
+    const { name, birthDate, bio, username } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ error: "Image is required" });
@@ -14,6 +14,7 @@ export class CreateCatController {
 
     const cat = await createCatService.execute({
       name,
+      username,
       birthDate,
       bio,
       imageBuffer: req.file.buffer,

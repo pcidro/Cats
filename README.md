@@ -39,6 +39,7 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 |   ✅   | Upload de imagens (Cloudinary + Multer)           |
 |   ✅   | Cadastro de gatos (`POST /api/cat`)               |
 |   ✅   | Listagem de gatos por usuário (`GET /api/users/:userId/cats`) |
+|   ✅   | Listagem dos próprios gatos (`GET /api/cats/me`) |
 |   ✅   | Busca de gato por ID (`GET /api/cat/:id`)         |
 |   ✅   | Edição de gatos (`PUT /api/cat/:id`)              |
 |   ✅   | Remoção de gatos (`DELETE /api/cat/:id`)          |

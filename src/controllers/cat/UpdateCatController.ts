@@ -3,7 +3,7 @@ import { UpdateCatService } from "../../services/cat/UpdateCatService";
 
 export class UpdateCatController {
   async handle(req: Request, res: Response) {
-    const { name, birthDate, bio } = req.body;
+    const { name, birthDate, bio, username } = req.body;
     const { id } = req.params;
     const ownerId = req.user_id;
 
@@ -12,6 +12,7 @@ export class UpdateCatController {
     const cat = await updateCatService.execute({
       id: id as string,
       name,
+      username,
       birthDate: birthDate ? new Date(birthDate) : undefined,
       bio,
       imageBuffer: req.file?.buffer,
