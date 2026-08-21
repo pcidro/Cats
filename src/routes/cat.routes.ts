@@ -43,7 +43,6 @@ catRoutes.get(
 
 catRoutes.get(
   "/cat/:id",
-  isAuthenticated,
   validateSchema(getCatSchema),
   new GetCatController().handle,
 );

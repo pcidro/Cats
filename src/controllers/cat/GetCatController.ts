@@ -11,6 +11,6 @@ export class GetCatController {
       id: id as string,
     });
 
-    return res.json({ cat });
+    return res.json(cat);
   }
 }

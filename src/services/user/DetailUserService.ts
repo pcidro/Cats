@@ -14,6 +14,7 @@ export class DetailUserService {
         role: true,
         createdAt: true,
         avatarUrl: true,
+        username: true,
       },
     });
 

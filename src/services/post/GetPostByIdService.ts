@@ -1,19 +1,15 @@
 import { prisma } from "../../lib/prisma";
+import { AppError } from "../../errors/AppError";
 
-interface GetPostRequest {
-  page?: number;
-  limit?: number;
+interface GetPostByIdRequest {
+  id: string;
 }
 
-export class GetPostService {
-  async execute({ page = 1, limit = 10 }: GetPostRequest = {}) {
-    const skip = (page - 1) * limit;
-
-    const posts = await prisma.post.findMany({
-      take: limit,
-      skip: skip,
-      orderBy: {
-        createdAt: "desc",
+export class GetPostByIdService {
+  async execute({ id }: GetPostByIdRequest) {
+    const post = await prisma.post.findFirst({
+      where: {
+        id,
       },
       include: {
         cat: {
@@ -33,6 +29,9 @@ export class GetPostService {
           },
         },
         comments: {
+          orderBy: {
+            createdAt: "asc",
+          },
           include: {
             user: {
               select: {
@@ -55,6 +54,10 @@ export class GetPostService {
       },
     });
 
-    return posts;
+    if (!post) {
+      throw new AppError("Post not found!", 404);
+    }
+
+    return post;
   }
 }

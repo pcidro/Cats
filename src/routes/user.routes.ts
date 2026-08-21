@@ -35,7 +35,6 @@ userRoutes.get("/me", isAuthenticated, new DetailUserController().handle);
 
 userRoutes.get(
   "/users/profile/:username",
-  isAuthenticated,
   validateSchema(getUserProfileSchema),
   new GetUserProfileController().handle,
 );

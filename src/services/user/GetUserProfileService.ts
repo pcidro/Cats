@@ -20,6 +20,7 @@ export class GetUserProfileService {
         role: true,
         createdAt: true,
         updatedAt: true,
+
         cats: {
           select: {
             id: true,
@@ -28,6 +29,50 @@ export class GetUserProfileService {
             bio: true,
             avatarUrl: true,
             createdAt: true,
+            username: true,
+          },
+        },
+        posts: {
+          orderBy: {
+            createdAt: "desc",
+          },
+          include: {
+            cat: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                avatarUrl: true,
+              },
+            },
+            author: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                avatarUrl: true,
+              },
+            },
+            comments: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    name: true,
+                    username: true,
+                    avatarUrl: true,
+                  },
+                },
+              },
+            },
+            likes: {
+              select: {
+                userId: true,
+              },
+            },
+            _count: {
+              select: { likes: true, comments: true },
+            },
           },
         },
       },

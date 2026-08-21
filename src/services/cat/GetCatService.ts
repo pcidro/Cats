@@ -11,6 +11,17 @@ export class GetCatService {
       where: {
         id,
       },
+      include: {
+        posts: {
+          orderBy: {
+            createdAt: "desc",
+          },
+          include: {
+            likes: { select: { userId: true } },
+            _count: { select: { likes: true, comments: true } },
+          },
+        },
+      },
     });
     if (!cat) {
       throw new AppError("No Cat Found!", 404);

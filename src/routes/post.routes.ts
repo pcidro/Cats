@@ -11,11 +11,20 @@ import { createPostSchema } from "../schemas/post/createPostSchema";
 import { editPostSchema } from "../schemas/post/editPostSchema";
 import { deletePostSchema } from "../schemas/post/deletePostSchema";
 
+import { GetPostByIdController } from "../controllers/post/GetPostByIdController";
+import { getPostByIdSchema } from "../schemas/post/getPostByIdSchema";
+
 const postRoutes = Router();
 const upload = multer(uploadConfig);
 
 // Rotas Posts
 postRoutes.get("/posts", new GetPostController().handle);
+
+postRoutes.get(
+  "/post/:id",
+  validateSchema(getPostByIdSchema),
+  new GetPostByIdController().handle,
+);
 
 postRoutes.post(
   "/post/:cat_id",
