@@ -26,6 +26,15 @@ O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript*
 
 ---
 
+### 🧪 Usuário para Testes
+
+Caso não queira criar uma conta, use este usuário para teste:
+
+- **Email:** `usuario@example.com`
+- **Senha:** `Usuario123`
+
+---
+
 ## Funcionalidades
 
 | Status | Funcionalidade                                    |
