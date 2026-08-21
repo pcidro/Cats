@@ -22,6 +22,8 @@ Este é o **backend** da rede social **Cats**. Uma API REST construída com Expr
 
 O frontend está sendo desenvolvido separadamente com **Next.js**, **TypeScript**, **Tailwind CSS** e **shadcn/ui**.
 
+🚀 **DEPLOY** > [https://cats-topaz.vercel.app](https://cats-topaz.vercel.app)
+
 ---
 
 ## Funcionalidades
